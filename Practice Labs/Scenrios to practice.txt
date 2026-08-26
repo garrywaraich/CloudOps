@@ -1,0 +1,439 @@
+Level 1: Guided Scenarios (1-5)
+
+For these, I'll tell you exactly what to build and the deployment order. Focus on Parameters, Variables, Resources, Outputs, Dependencies, and Naming.
+
+Scenario 1: Corporate File Storage
+Requirements
+
+Deploy:
+
+Resource Group (assume already exists)
+Storage Account
+Blob Service
+Blob Container
+Parameters
+Environment (dev/test/prod)
+Storage Account Name Prefix
+
+Outputs
+Storage Account Name
+Storage Account ID
+Container Name
+
+Skills Practiced
+
+✅ Parameters
+
+✅ Variables
+
+✅ Child Resources
+
+✅ Outputs
+
+✅ Implicit Dependencies
+
+
+Scenario 2: Virtual Network Foundation
+Requirements
+
+Deploy in order:
+
+Virtual Network
+Frontend Subnet
+Backend Subnet
+Parameters
+Environment
+VNet Address Space
+Subnet Prefixes
+
+Outputs
+VNet ID
+Frontend Subnet ID
+Backend Subnet ID
+
+Skills Practiced
+
+✅ Arrays
+
+✅ Objects
+
+✅ Resource Dependencies
+
+✅ Outputs
+
+Scenario 3: Storage Account with Private Endpoint
+Requirements
+
+Deploy:
+
+Virtual Network
+Subnet
+Storage Account
+Private Endpoint
+Order
+VNet
+ ↓
+Subnet
+ ↓
+Storage Account
+ ↓
+Private Endpoint
+
+Outputs
+Storage Account ID
+Private Endpoint ID
+
+Skills Practiced
+
+✅ Dependencies
+
+✅ Resource IDs
+
+✅ Networking
+
+✅ Private Endpoints
+
+Scenario 4: VM Networking Components
+Requirements
+
+Deploy:
+
+VNet
+Subnet
+NSG
+NIC
+Virtual Machine
+Outputs
+VM Name
+NIC ID
+Subnet ID
+NSG ID
+
+Skills Practiced
+
+✅ Dependencies
+
+✅ Objects
+
+✅ Multiple Resources
+
+✅ Outputs
+
+Scenario 5: Web Application Platform
+Requirements
+
+Deploy:
+
+App Service Plan
+Web App
+Storage Account
+Outputs
+Web App URL
+Storage Account Name
+
+Skills Practiced
+
+✅ App Services
+
+✅ Outputs
+
+✅ Resource Relationships
+
+Level 2: Concept-Focused Scenarios (6-10)
+
+For these, I'm telling you the Bicep concepts you must use.
+
+Scenario 6: Multi-Region Storage Deployment
+Requirement
+
+Deploy 3 storage accounts:
+
+East US
+West US
+Central US
+
+Mandatory Concepts
+
+✅ Array
+
+✅ Resource Loop
+
+✅ Output Loop
+
+✅ range()
+
+Scenario 7: VNet with Dynamic Subnets
+Requirement
+
+Deploy a VNet with subnets passed as configuration.
+
+Mandatory Concepts
+
+✅ Array of Objects
+
+✅ Variable Loop
+
+✅ Nested Resource Configuration
+
+Example structure:
+
+param subnets array
+
+Scenario 8: Optional Bastion Deployment
+Requirement
+
+Create:
+
+VNet
+Subnet
+Optional Bastion
+
+Mandatory Concepts
+
+✅ Boolean Parameter
+
+✅ Conditional Deployment
+
+✅ Conditional Outputs
+
+Scenario 9: Dev/Test/Prod Storage Deployments
+Requirement
+
+Different naming based on environment.
+
+Mandatory Concepts
+
+✅ Variables
+
+✅ Ternary Operator
+
+✅ Conditional Expressions
+
+Example:
+
+environment == 'prod'
+
+Scenario 10: Deploy Multiple VNets with Multiple Subnets
+Requirement
+
+Deploy:
+
+3 VNets
+2 Subnets in each
+
+Mandatory Concepts
+
+✅ Nested Loops
+
+✅ Arrays
+
+✅ Objects
+
+✅ Resource Iteration
+
+Level 3: Cloud Engineer Challenges (11-20)
+
+These are intentionally less guided. You'll decide how to structure the solution.
+
+Scenario 11
+
+Deploy a hub-and-spoke network.
+
+Requirements:
+
+1 Hub VNet
+2 Spoke VNets
+
+
+Include peering.
+
+Scenario 12
+
+Deploy a storage platform.
+
+Requirements:
+
+2 Storage Accounts
+3 Blob Containers per Storage Account
+
+
+Use loops wherever possible.
+
+Scenario 13
+
+Deploy a development environment.
+
+Requirements:
+
+VNet
+Subnet
+NSG
+Linux VM
+
+
+Implement naming standards.
+
+Scenario 14
+
+Deploy an Azure Files solution.
+
+Requirements:
+
+Storage Account
+File Service
+2 File Shares
+
+
+Return useful outputs.
+
+Scenario 15
+
+Build a production storage solution.
+
+Requirements:
+
+Storage Account
+Private Endpoint
+Blob Container
+
+
+Restrict network access.
+
+Scenario 16
+
+Deploy three identical application environments.
+
+Requirements:
+
+Dev
+Test
+Prod
+
+
+Each environment gets:
+
+Storage Account
+VNet
+NSG
+
+
+Use loops and objects.
+
+Scenario 17
+
+Build an environment with optional monitoring.
+
+Requirements:
+
+Storage Account
+Log Analytics Workspace
+
+
+Monitoring should be controlled by a parameter.
+
+Scenario 18
+
+Deploy multiple NSGs.
+
+Input should be an array of objects.
+
+Example:
+
+NSG Name
+Priority
+Port
+Access
+
+
+Generate all resources through looping.
+
+Scenario 19
+
+Create a reusable module solution.
+
+Requirements:
+
+network.bicep
+storage.bicep
+main.bicep
+
+
+Pass information between modules using outputs and parameters.
+
+Scenario 20 (Capstone Project)
+
+Design a complete landing zone.
+
+Requirements:
+
+VNet
+3 Subnets
+NSG
+Storage Account
+Blob Container
+Private Endpoint
+Log Analytics Workspace
+
+
+Must use:
+
+✅ Parameters
+
+✅ Variables
+
+✅ Outputs
+
+✅ Arrays
+
+✅ Objects
+
+✅ Loops
+
+✅ Conditional Deployment
+
+✅ Dependencies
+
+✅ Modules
+
+This single project will exercise nearly every Bicep fundamental you've learned.
+
+Suggested Practice Order
+
+Week 1:
+
+1
+2
+3
+4
+5
+
+
+Week 2:
+
+6
+7
+8
+9
+10
+
+
+Week 3:
+
+11
+12
+13
+14
+15
+
+
+Week 4:
+
+16
+17
+18
+19
+20
+
+Mentor Challenge
+
+Before moving into advanced topics like scopes, existing resources, and module registries, I would strongly recommend completing Scenarios 1-10. If you can build those from memory without looking at Microsoft Learn, your Bicep fundamentals will be much stronger than most candidates applying for junior Cloud Engineer roles.
