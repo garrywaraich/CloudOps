@@ -59,3 +59,7 @@ resource Storageblobcontainer 'Microsoft.Storage/storageAccounts/blobServices/co
   name: 'Files-${environmentType}'
   parent: storageblobservice
 }
+
+output Storageoutputname string = storageaccounts.name
+output Storageoutputid string = storageaccounts.id
+output storageoutputcontainer string = Storageblobcontainer.name
