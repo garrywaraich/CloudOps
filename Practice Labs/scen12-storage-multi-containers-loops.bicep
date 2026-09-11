@@ -1,4 +1,4 @@
-param stglocation = resourceGroup().location
+param stglocation string = resourceGroup().location
 
 var storageaccNames array = [
   'prod'
