@@ -1,11 +1,5 @@
 param locations string = resourceGroup().location
 
-// param vnets array = [
-//   '10.1.0.0/16'
-//   '10.2.0.0/16'
-//   '10.3.0.0/16'
-// ]
-
 var hubspoke = {
     hub: {
       name: 'hubvnet'
@@ -23,7 +17,7 @@ var hubspoke = {
 
 resource hubvnetcreate 'Microsoft.Network/virtualNetworks@2025-07-01' = {
   name: hubspoke.hub.name
-  location: resourceGroup().location
+  location: locations
   properties:{
     addressSpace:{
       addressPrefixes:[
@@ -35,7 +29,7 @@ resource hubvnetcreate 'Microsoft.Network/virtualNetworks@2025-07-01' = {
 
 resource spoke1vnetcreate 'Microsoft.Network/virtualNetworks@2025-07-01' = {
   name: hubspoke.spoke1.name
-  location: resourceGroup().location
+  location: locations
   properties:{
     addressSpace:{
       addressPrefixes:[
@@ -47,7 +41,7 @@ resource spoke1vnetcreate 'Microsoft.Network/virtualNetworks@2025-07-01' = {
 
 resource spoke2vnetcreate 'Microsoft.Network/virtualNetworks@2025-07-01' = {
   name: hubspoke.spoke2.name
-  location: resourceGroup().location
+  location: locations
   properties:{
     addressSpace:{
       addressPrefixes:[
