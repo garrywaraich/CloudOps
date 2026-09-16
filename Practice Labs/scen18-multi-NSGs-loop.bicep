@@ -1,33 +1,38 @@
-var nsgproperties = [ for nsgs in range(0, 5): {
-    name: 'nsg${nsgs}${uniqueString(resourceGroup().id)}'
-    priority: 5000
-    port: 80
-    protocol: 'TCP'
-    access: 'Allow'
-    direction: 'Inbound'
+var nsgNames = [ for i in range(0, 5): 'nsg${i}${uniqueString(resourceGroup().id)}']
 
-  }
+var portsallowed = [
+  20
+  80
+  443
 ]
 
-resource nsgsymbolic 'Microsoft.Network/networkSecurityGroups@2025-09-01' = [for i in nsgproperties: {
-  name: 
-  location:
+var nsgrules = [for (port, i) in portsallowed: {
+    name: 'allowPort-${port}'
+    properties:{
+      access: 'Allow'
+      direction: 'Inbound'
+      priority: 100 + i
+      protocol: 'Tcp'
+      sourceAddressPrefix: '*'
+      destinationAddressPrefix: '*'
+      sourcePortRange: '*'
+      destinationPortRange: string(port)
+    }
+  }]
+
+resource nsgsymbolic 'Microsoft.Network/networkSecurityGroups@2025-09-01' = [for nsgName in nsgNames: {
+  name: nsgName
+  location: resourceGroup().location
   properties:{
-    securityRules:[
-      {
-        name:
-        properties:{
-          access: 
-          direction: 
-          priority: 
-          protocol: 
-        }
-      }
-    ]
+    securityRules: nsgrules
   }
 }
+] 
 
-NSG Name
-Priority
-Port
-Access
+output nsginfo array = [
+  for i in range(0, length(nsgNames)): {
+    name: nsgsymbolic[i].name
+    id: nsgsymbolic[i].id
+    securityRules: nsgsymbolic[i].properties.securityRules
+  }
+]
